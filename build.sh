@@ -578,7 +578,7 @@ cp ${BUILD_DIR}/scripts/ranlib-wrapper.sh ${INSTALL_DIR}/usr/bin/ranlib \
 # 
 
 P=autoconf-2.69
-URL=http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz
+URL=http://ftpmirror.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz
 CKSUM=sha256:954bd69b391edc12d6a4a51a2dd1476543da5c6bbf05a95b59dc0dd6fd4c2969
 
   SKIP_AUTORECONF=yes \
@@ -593,7 +593,7 @@ CKSUM=sha256:954bd69b391edc12d6a4a51a2dd1476543da5c6bbf05a95b59dc0dd6fd4c2969
 # 
 
 P=automake-1.15
-URL=http://ftp.gnu.org/gnu/automake/automake-1.15.tar.gz
+URL=http://ftpmirror.gnu.org/gnu/automake/automake-1.15.tar.gz
 CKSUM=sha256:7946e945a96e28152ba5a6beb0625ca715c6e32ac55f2e353ef54def0c8ed924
 
 SKIP_AUTORECONF=yes \
@@ -608,7 +608,7 @@ build_and_install_autotools \
 # 
 
   P=libtool-2.4
-  URL=http://mirror.frgl.pw/gnu/libtool/libtool-2.4.tar.xz
+  URL=http://ftpmirror.gnu.org/gnu/libtool/libtool-2.4.tar.xz
   CKSUM=sha256:afcce660d3dc54c63a0a5ba3cf05272239dc3c54bbeba20f6bad250f9dc007ae
 
   SKIP_AUTORECONF=yes \
@@ -634,7 +634,7 @@ fi
 # 
 
   P=gettext-0.19.8
-  URL=http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.8.tar.xz
+  URL=http://ftpmirror.gnu.org/gnu/gettext/gettext-0.19.8.tar.xz
   CKSUM=sha256:9c1781328238caa1685d7bc7a2e1dcf1c6c134e86b42ed554066734b621bd12f
     
   build_and_install_autotools \
@@ -660,7 +660,7 @@ build_and_install_autotools \
 # 
 
 P=tar-1.29
-URL=http://ftp.gnu.org/gnu/tar/tar-1.29.tar.bz2
+URL=http://ftpmirror.gnu.org/gnu/tar/tar-1.29.tar.bz2
 CKSUM=sha256:236b11190c0a3a6885bdb8d61424f2b36a5872869aa3f7f695dea4b4843ae2f2
 
 EXTRA_OPTS="--with-lzma=`which xz`"
@@ -832,7 +832,7 @@ build_and_install_setup_py \
 # 
 
     P=bison-3.0.4
-    URL='http://ftp.gnu.org/gnu/bison/bison-3.0.4.tar.xz'
+    URL='http://ftpmirror.gnu.org/gnu/bison/bison-3.0.4.tar.xz'
     CKSUM=sha256:a72428c7917bdf9fa93cb8181c971b6e22834125848cf1d03ce10b1bb0716fe1
 
   SKIP_AUTORECONF=yes \
@@ -1360,7 +1360,7 @@ fi
 # XXX: @CF: required by gr-wavelet, depends on cblas
 
   P=gsl-2.3
-  URL='http://mirror.frgl.pw/gnu/gsl/gsl-2.3.tar.gz'
+  URL='http://ftpmirror.gnu.org/gnu/gsl/gsl-2.3.tar.gz'
   CKSUM=sha256:562500b789cd599b3a4f88547a7a3280538ab2ff4939504c8b4ac4ca25feadfb
 
   LDFLAGS="${LDFLAGS} -lcblas -lblas -lf2c" \
