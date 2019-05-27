@@ -1,0 +1,6 @@
+language: bash
+os: osx
+osx_image: xcode9.4
+install: true
+script:
+- bash -ex build.sh
