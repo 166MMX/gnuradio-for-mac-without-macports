@@ -1,7 +1,5 @@
 language: bash
 os: osx
 osx_image: xcode9.4
-install:
-- brew install Caskroom/cask/xquartz
 script:
-- bash -ex build.sh
+- bash -x build.sh
