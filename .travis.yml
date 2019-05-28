@@ -1,5 +1,23 @@
 language: bash
 os: osx
 osx_image: xcode9.4
+before_install:
+- brew update
+install:
+- |
+  brew install autoconf automake libtool gettext xz \
+               gnu-tar pkg-config cmake boost pcre \
+               swig libffi glib cppunit bison \
+               openssl thrift orc pygobject libtiff \
+               libpng jpeg pixman freetype harfbuzz \
+               fontconfig cairo gdk-pixbuf atk pango \
+               gtk+ fftw gsl libusb uhd \
+               sdl zmq zmqpp wxWidgets librtlsdr \
+               qt qwt sip gnuradio gr-osmosdr \
+               hackrf libbladerf airspy librsvg
+- |
+  pip install Mako Cheetah lxml pycairo PyGTK \
+              numpy f2c wxPython PyQt4 CairoSVG
+# libf2c blas cblas SoapySDR LimeSuite osmo-sdr libmirisdr
 script:
 - bash -x build.sh
