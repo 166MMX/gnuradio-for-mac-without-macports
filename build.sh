@@ -1716,6 +1716,9 @@ else
   touch ${TMP_DIR}/.${P}.done
 fi
 
+}
+# build_dep
+
 #
 # Install gnuradio
 #
@@ -1947,9 +1950,6 @@ build_and_install_cmake \
 #    ${CKSUM} \
 #    ${T} \
 #    ${BRANCH}
-
-}
-# build_dep
 
 #
 # Install some useful scripts
