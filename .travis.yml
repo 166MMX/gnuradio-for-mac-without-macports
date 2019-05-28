@@ -16,14 +16,14 @@ install:
                  pango gtk+ fftw gsl uhd sdl \
                  zmq zmqpp wxWidgets librtlsdr \
                  qt qwt sip hackrf airspy \
-                 libbladerf librsvg python@2
+                 libbladerf librsvg python@2 pygtk
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
 # SoapySDR LimeSuite osmo-sdr libmirisdr
 - |
   pip2 install  --upgrade \
                 pip setuptools
 - |
-  pip2 install  Mako Cheetah lxml pycairo PyGTK \
+  pip2 install  Mako Cheetah lxml pycairo \
                 numpy f2c wxPython PyQt4 CairoSVG
 # libf2c blas cblas 
 script_before:
