@@ -29,8 +29,9 @@ install:
 - virtualenv -p /usr/bin/python2.7 venv
 - |
   ./venv/bin/pip install \
-                 CairoSVG    Cheetah     Mako        f2c         \
-                 lxml        numpy       pycairo     wxPython
+                 CairoSVG==1.0.22        Cheetah     Mako        \
+                 f2c         lxml        numpy       pycairo     \
+                 wxPython
 - |
   ./venv/bin/pip install \
                  PyQt4
