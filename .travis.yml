@@ -5,25 +5,25 @@ before_install:
 - brew update
 - brew cleanup
 install:
-- |
-  brew upgrade   libpng libtiff pcre boost cmake \
-                 automake openssl libusb jpeg libffi \
-                 pkg-config xz gettext libtool autoconf
-- |
-  brew install   gnu-tar swig glib cppunit bison \
-                 thrift orc pygobject pixman freetype \
-                 harfbuzz fontconfig cairo gdk-pixbuf atk \
-                 pango gtk+ fftw gsl uhd sdl \
-                 zmq zmqpp wxWidgets librtlsdr \
-                 qt qwt sip hackrf airspy \
-                 libbladerf librsvg python@2 pygtk
+- brew upgrade   autoconf   automake    boost       cairo       \
+                 cmake      fontconfig  freetype    gettext     \
+                 glib       jpeg        libffi      libpng      \
+                 libtiff    libtool     libusb      openssl     \
+                 pcre       pixman      pkg-config  python@2    \
+                 qt         xz
+
+- brew install   airspy     atk         bison       cppunit     \
+                 fftw       gdk-pixbuf  gnu-tar     gsl         \
+                 gtk+       hackrf      harfbuzz    libbladerf  \
+                 librsvg    librtlsdr   orc         pango       \
+                 pygobject  pygtk       qwt         sdl         \
+                 sip        swig        thrift      uhd         \
+                 wxWidgets  zmq         zmqpp
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
 # SoapySDR LimeSuite osmo-sdr libmirisdr
-- |
-  pip2 install  --upgrade \
+- pip2 install  --upgrade \
                 pip setuptools
-- |
-  pip2 install  Mako Cheetah lxml pycairo \
+- pip2 install  Mako Cheetah lxml pycairo \
                 numpy f2c wxPython PyQt4 CairoSVG
 # libf2c blas cblas 
 script_before:
