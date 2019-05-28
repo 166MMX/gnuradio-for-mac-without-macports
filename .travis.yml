@@ -30,8 +30,7 @@ install:
 - |
   ./venv/bin/pip install \
                  CairoSVG==1.0.22        Cheetah     Mako        \
-                 f2c         lxml        numpy       pycairo     \
-                 wxPython
+                 lxml        numpy       pycairo     wxPython
 - |
   ./venv/bin/pip install \
                  PyQt4
