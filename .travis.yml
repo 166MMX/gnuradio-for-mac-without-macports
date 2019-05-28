@@ -5,13 +5,15 @@ before_install:
 - brew update
 - brew cleanup
 install:
-- brew upgrade   autoconf   automake    boost       cairo       \
+- |
+  brew upgrade   autoconf   automake    boost       cairo       \
                  cmake      fontconfig  freetype    gettext     \
                  glib       jpeg        libffi      libpng      \
                  libtiff    libtool     libusb      openssl     \
                  pcre       pixman      pkg-config  python@2    \
                  qt         xz
-- brew install   airspy     atk         bison       cppunit     \
+- |
+  brew install   airspy     atk         bison       cppunit     \
                  fftw       gdk-pixbuf  gnu-tar     gsl         \
                  gtk+       hackrf      harfbuzz    libbladerf  \
                  librsvg    librtlsdr   orc         pango       \
@@ -20,14 +22,17 @@ install:
                  wxWidgets  zmq         zmqpp
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
 # SoapySDR LimeSuite osmo-sdr libmirisdr
-- pip2 install   --upgrade \
+- |
+  pip2 install   --upgrade \
                  pip setuptools
 - pip2 install   virtualenv
 - virtualenv -p /usr/bin/python2.7 venv
-- ./venv/bin/pip install \
+- |
+  ./venv/bin/pip install \
                  CairoSVG    Cheetah     Mako        f2c         \
                  lxml        numpy       pycairo     wxPython
-- ./venv/bin/pip install \
+- |
+  ./venv/bin/pip install \
                  PyQt4
 # libf2c blas cblas 
 script_before:
