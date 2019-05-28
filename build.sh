@@ -573,6 +573,7 @@ cp ${BUILD_DIR}/scripts/ranlib-wrapper.sh ${INSTALL_DIR}/usr/bin/ranlib \
 [[ $(which ar) = ${INSTALL_DIR}/usr/bin/ar ]] \
   || E "sanity check failed. ar-wrapper is not in PATH"
 
+function build_dep() {
 #
 # Install autoconf
 # 
@@ -1946,6 +1947,9 @@ build_and_install_cmake \
 #    ${CKSUM} \
 #    ${T} \
 #    ${BRANCH}
+
+}
+# build_dep
 
 #
 # Install some useful scripts
