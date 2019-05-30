@@ -1,86 +1,91 @@
 language: bash
 os: osx
 osx_image: xcode9.4
+cache:
+  directories:
+    - /usr/local/Homebrew
+    - $HOME/Library/Caches/Homebrew
 before_install:
-- brew update
-- brew cleanup
+  - brew update
 install:
-- |
-  brew upgrade   autoconf   automake    boost       cairo       \
-                 cmake      fontconfig  freetype    gettext     \
-                 glib       jpeg        libffi      libpng      \
-                 libtiff    libtool     libusb      openssl     \
-                 pcre       pixman      pkg-config  python@2    \
-                 qt         xz
-- |
-  brew install   airspy     atk         bison       cppunit     \
-                 fftw       gdk-pixbuf  gnu-tar     gsl         \
-                 gtk+       hackrf      harfbuzz    libbladerf  \
-                 librsvg    librtlsdr   orc         pango       \
-                 pygobject  pygtk       qwt         sdl         \
-                 sip        swig        thrift      uhd         \
-                 wxWidgets  zmq         zmqpp
-- |
-  brew tap cartr/qt4
-  brew tap-pin cartr/qt4
-  travis_wait 30 brew install --build-from-source qt@4
+  - |
+    brew upgrade   autoconf   automake    boost       cairo       \
+                   cmake      fontconfig  freetype    gettext     \
+                   glib       jpeg        libffi      libpng      \
+                   libtiff    libtool     libusb      openssl     \
+                   pcre       pixman      pkg-config  python@2    \
+                   qt         xz
+  - |
+    brew install   airspy     atk         bison       cppunit     \
+                   fftw       gdk-pixbuf  gnu-tar     gsl         \
+                   gtk+       hackrf      harfbuzz    libbladerf  \
+                   librsvg    librtlsdr   orc         pango       \
+                   pygobject  pygtk       qwt         sdl         \
+                   sip        swig        thrift      uhd         \
+                   wxWidgets  zmq         zmqpp
+  - |
+    brew tap cartr/qt4
+    brew tap-pin cartr/qt4
+    travis_wait 30 brew install --build-from-source qt@4
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
 # SoapySDR LimeSuite osmo-sdr libmirisdr
 # pygobject-introspection
-- |
-  pip2 install   --upgrade \
-                 pip setuptools
-- pip2 install   virtualenv
-- virtualenv -p /usr/bin/python2.7 venv
-- |
-  PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH" \
-  ./venv/bin/pip install \
-                 pycairo
-- |
-  ./venv/bin/pip install \
-                 CairoSVG==1.0.22        Cheetah     Mako        \
-                 lxml        numpy       wxPython
+  - |
+    pip2 install   --upgrade \
+                   pip setuptools
+  - pip2 install   virtualenv
+  - virtualenv -p /usr/bin/python2.7 venv
+  - |
+    PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH" \
+    ./venv/bin/pip install \
+                   pycairo
+  - |
+    ./venv/bin/pip install \
+                   CairoSVG==1.0.22        Cheetah     Mako        \
+                   lxml        numpy       wxPython
 # https://github.com/barak/f2c
 # https://packages.gentoo.org/packages/dev-libs/libf2c
 # libf2c blas cblas 
 script_before:
-- |
-  PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+  - |
+    PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 
-  PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH"
+    PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-  PATH="/usr/local/opt/openssl/bin:$PATH"
-  LDFLAGS="-L/usr/local/opt/openssl/lib $LDFLAGS"
-  CPPFLAGS="-I/usr/local/opt/openssl/include $CPPFLAGS"
-  PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:$PKG_CONFIG_PATH"
-  
-  LDFLAGS="-L/usr/local/opt/readline/lib $LDFLAGS"
-  CPPFLAGS="-I/usr/local/opt/readline/include $CPPFLAGS"
-  PKG_CONFIG_PATH="/usr/local/opt/readline/lib/pkgconfig:$PKG_CONFIG_PATH"
-  
-  PATH="/usr/local/opt/sqlite/bin:$PATH"
-  LDFLAGS="-L/usr/local/opt/sqlite/lib $LDFLAGS"
-  CPPFLAGS="-I/usr/local/opt/sqlite/include $CPPFLAGS"
-  PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH"
-  
-  PATH="/usr/local/opt/bison/bin:$PATH"
-  LDFLAGS="-L/usr/local/opt/bison/lib $LDFLAGS"
-  
-  PATH="/usr/local/opt/icu4c/bin:$PATH"
-  PATH="/usr/local/opt/icu4c/sbin:$PATH"
-  LDFLAGS="-L/usr/local/opt/icu4c/lib $LDFLAGS"
-  CPPFLAGS="-I/usr/local/opt/icu4c/include $CPPFLAGS"
-  PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
-  
-  PATH="/usr/local/opt/qt/bin:$PATH"
-  LDFLAGS="-L/usr/local/opt/qt/lib $LDFLAGS"
-  CPPFLAGS="-I/usr/local/opt/qt/include $CPPFLAGS"
-  PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig:$PKG_CONFIG_PATH"
-  
-  LDFLAGS="-L/usr/local/opt/openblas/lib $LDFLAGS"
-  CPPFLAGS="-I/usr/local/opt/openblas/include $CPPFLAGS"
-  PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig:$PKG_CONFIG_PATH"
+    PATH="/usr/local/opt/openssl/bin:$PATH"
+    LDFLAGS="-L/usr/local/opt/openssl/lib $LDFLAGS"
+    CPPFLAGS="-I/usr/local/opt/openssl/include $CPPFLAGS"
+    PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-  export PATH LDFLAGS CPPFLAGS
+    LDFLAGS="-L/usr/local/opt/readline/lib $LDFLAGS"
+    CPPFLAGS="-I/usr/local/opt/readline/include $CPPFLAGS"
+    PKG_CONFIG_PATH="/usr/local/opt/readline/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+    PATH="/usr/local/opt/sqlite/bin:$PATH"
+    LDFLAGS="-L/usr/local/opt/sqlite/lib $LDFLAGS"
+    CPPFLAGS="-I/usr/local/opt/sqlite/include $CPPFLAGS"
+    PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+    PATH="/usr/local/opt/bison/bin:$PATH"
+    LDFLAGS="-L/usr/local/opt/bison/lib $LDFLAGS"
+
+    PATH="/usr/local/opt/icu4c/bin:$PATH"
+    PATH="/usr/local/opt/icu4c/sbin:$PATH"
+    LDFLAGS="-L/usr/local/opt/icu4c/lib $LDFLAGS"
+    CPPFLAGS="-I/usr/local/opt/icu4c/include $CPPFLAGS"
+    PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+    PATH="/usr/local/opt/qt/bin:$PATH"
+    LDFLAGS="-L/usr/local/opt/qt/lib $LDFLAGS"
+    CPPFLAGS="-I/usr/local/opt/qt/include $CPPFLAGS"
+    PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+    LDFLAGS="-L/usr/local/opt/openblas/lib $LDFLAGS"
+    CPPFLAGS="-I/usr/local/opt/openblas/include $CPPFLAGS"
+    PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+    export PATH LDFLAGS CPPFLAGS
 script:
-- bash -x build.sh
+  - bash -x build.sh
+before_cache:
+  - brew cleanup
