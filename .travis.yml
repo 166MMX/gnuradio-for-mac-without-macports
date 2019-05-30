@@ -24,7 +24,6 @@ install:
                    sip        swig        thrift      uhd         \
                    wxWidgets  zmq         zmqpp
   - brew tap cartr/qt4
-  - brew tap-pin cartr/qt4
 #  - travis_wait 60 brew install --build-from-source qt@4
   - brew install --force-bottle qt@4
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
