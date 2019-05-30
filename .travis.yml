@@ -7,6 +7,8 @@ cache:
     - $HOME/Library/Caches/Homebrew
     - $HOME/Library/Caches/pip
 before_install:
+  - |
+    brew doctor || softwareupdate -l
   - brew update
 install:
   - |
@@ -31,7 +33,7 @@ install:
 # SoapySDR LimeSuite osmo-sdr libmirisdr
 # pygobject-introspection
   - |
-    pip2 install   --upgrade \
+    pip2 install --upgrade \
                    pip setuptools
   - pip2 install   virtualenv
   - virtualenv -p /usr/bin/python2.7 venv
@@ -85,7 +87,6 @@ before_script:
     PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig:$PKG_CONFIG_PATH"
 
     export PATH LDFLAGS CPPFLAGS
-  - brew doctor
 script:
   - bash -x build.sh
 before_cache:
