@@ -20,8 +20,13 @@ install:
                  pygobject  pygtk       qwt         sdl         \
                  sip        swig        thrift      uhd         \
                  wxWidgets  zmq         zmqpp
+- |
+  brew tap cartr/qt4
+  brew tap-pin cartr/qt4
+  brew install --build-from-source qt@4
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
 # SoapySDR LimeSuite osmo-sdr libmirisdr
+# pygobject-introspection
 - |
   pip2 install   --upgrade \
                  pip setuptools
@@ -35,15 +40,14 @@ install:
   ./venv/bin/pip install \
                  CairoSVG==1.0.22        Cheetah     Mako        \
                  lxml        numpy       wxPython
-- |
-  ./venv/bin/pip install \
-                 PyQt4
 # https://github.com/barak/f2c
 # https://packages.gentoo.org/packages/dev-libs/libf2c
 # libf2c blas cblas 
 script_before:
 - |
   PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+
+  PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH"
 
   PATH="/usr/local/opt/openssl/bin:$PATH"
   LDFLAGS="-L/usr/local/opt/openssl/lib $LDFLAGS"
