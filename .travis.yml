@@ -46,7 +46,7 @@ install:
 # https://github.com/barak/f2c
 # https://packages.gentoo.org/packages/dev-libs/libf2c
 # libf2c blas cblas 
-script_before:
+before_script:
   - |
     PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 
