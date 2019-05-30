@@ -10,39 +10,52 @@ before_install:
   - |
     brew doctor || softwareupdate -l
   - brew update
+addons:
+  homebrew:
+    taps:
+      - cartr/qt4
+    packages:
+      - airspy     
+      - atk         
+      - bison       
+      - cppunit    
+      - fftw       
+      - gdk-pixbuf  
+      - gnu-tar     
+      - gsl        
+      - gtk+       
+      - hackrf      
+      - harfbuzz    
+      - libbladerf 
+      - librsvg    
+      - librtlsdr   
+      - orc         
+      - pango      
+      - pygobject  
+      - pygtk       
+      - qwt         
+      - sdl        
+      - sip        
+      - swig        
+      - thrift      
+      - uhd        
+      - wxWidgets  
+      - zmq         
+      - zmqpp
+      - qt@4
+    update: true
 install:
-  - |
-    brew upgrade   autoconf   automake    boost       cairo       \
-                   cmake      fontconfig  freetype    gettext     \
-                   glib       jpeg        libffi      libpng      \
-                   libtiff    libtool     libusb      openssl     \
-                   pcre       pixman      pkg-config  python@2    \
-                   qt         xz
-  - |
-    brew install   airspy     atk         bison       cppunit     \
-                   fftw       gdk-pixbuf  gnu-tar     gsl         \
-                   gtk+       hackrf      harfbuzz    libbladerf  \
-                   librsvg    librtlsdr   orc         pango       \
-                   pygobject  pygtk       qwt         sdl         \
-                   sip        swig        thrift      uhd         \
-                   wxWidgets  zmq         zmqpp
-  - brew tap cartr/qt4
-#  - travis_wait 60 brew install --build-from-source qt@4
-  - brew install --force-bottle qt@4
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
 # SoapySDR LimeSuite osmo-sdr libmirisdr
 # pygobject-introspection
-  - |
-    pip2 install --upgrade \
-                   pip setuptools
-  - pip2 install   virtualenv
+  - pip2 install --upgrade pip setuptools
+  - pip2 install --user virtualenv
   - virtualenv -p /usr/bin/python2.7 venv
   - |
     PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH" \
-    ./venv/bin/pip install \
-                   pycairo
+    ./venv/bin/pip install pycairo
   - |
-    ./venv/bin/pip install \
+    ./venv/bin/pip install                                         \
                    CairoSVG==1.0.22        Cheetah     Mako        \
                    lxml        numpy       wxPython
 # https://github.com/barak/f2c
@@ -88,6 +101,7 @@ before_script:
 
     export PATH LDFLAGS CPPFLAGS
 script:
+  - env
   - bash -x build.sh
 before_cache:
   - brew cleanup
