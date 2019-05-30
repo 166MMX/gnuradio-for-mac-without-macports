@@ -26,7 +26,7 @@ install:
   - |
     brew tap cartr/qt4
     brew tap-pin cartr/qt4
-    travis_wait 30 brew install --build-from-source qt@4
+    travis_wait 60 brew install --build-from-source qt@4
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
 # SoapySDR LimeSuite osmo-sdr libmirisdr
 # pygobject-introspection
