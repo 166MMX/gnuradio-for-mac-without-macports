@@ -5,6 +5,7 @@ cache:
   directories:
     - /usr/local/Homebrew
     - $HOME/Library/Caches/Homebrew
+    - $HOME/Library/Caches/pip
 before_install:
   - brew update
 install:
