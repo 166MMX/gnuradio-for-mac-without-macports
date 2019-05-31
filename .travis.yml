@@ -6,10 +6,6 @@ cache:
     - /usr/local/Homebrew
     - $HOME/Library/Caches/Homebrew
     - $HOME/Library/Caches/pip
-before_install:
-  - |
-    brew doctor || softwareupdate -l
-  - brew update
 addons:
   homebrew:
     taps:
@@ -25,12 +21,10 @@ addons:
       - gsl        
       - gtk+       
       - hackrf      
-      - harfbuzz    
       - libbladerf 
       - librsvg    
       - librtlsdr   
       - orc         
-      - pango      
       - pygobject  
       - pygtk       
       - qwt         
@@ -103,6 +97,8 @@ before_script:
     export PATH LDFLAGS CPPFLAGS
 script:
   - env
+  - |
+    brew doctor --verbose || softwareupdate --list
   - bash -x build.sh
 before_cache:
   - brew cleanup
