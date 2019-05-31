@@ -10,6 +10,7 @@ addons:
   homebrew:
     taps:
       - cartr/qt4
+      - rafaelgarrido/homebrew-caveats
     packages:
       - airspy     
       - atk         
@@ -37,6 +38,7 @@ addons:
       - zmq         
       - zmqpp
       - qt@4
+      - brew-caveats
     update: true
 install:
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
@@ -96,9 +98,9 @@ before_script:
 
     export PATH LDFLAGS CPPFLAGS
 script:
+  - "brew caveats $(brew list)" 
+  - "brew doctor --verbose || softwareupdate --list"
   - env
-  - |
-    brew doctor --verbose || softwareupdate --list
   - bash -x build.sh
 before_cache:
   - brew cleanup
