@@ -168,7 +168,13 @@ script:
   - source venv/bin/activate
   - env
   - tree /usr/local/opt
+  # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
+  - cd gnuradio; cmake 
+  - mkdir -p build/gnuradio
+  - cd build/gnuradio
+  - cmake $GNURADIO_CMAKE_OPTS ../../gnuradio
+  - make
+  - make test
   - bash -x build.sh
-  - cd gnuradio; cmake $GNURADIO_CMAKE_OPTS
 before_cache:
   - brew cleanup
