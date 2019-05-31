@@ -73,6 +73,8 @@ addons:
       - brew-caveats
       - tree
     update: true
+before_install:
+  - brew upgrade
 install:
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
 # SoapySDR LimeSuite osmo-sdr libmirisdr
@@ -171,7 +173,7 @@ script:
   # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   - mkdir -p build/gnuradio
   - cd build/gnuradio
-  - cmake $GNURADIO_CMAKE_OPTS ../../gnuradio
+  - "cmake $GNURADIO_CMAKE_OPTS ../../gnuradio"
   - make
   - make test
   - bash -x build.sh
