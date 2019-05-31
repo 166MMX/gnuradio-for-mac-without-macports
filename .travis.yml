@@ -12,14 +12,53 @@ addons:
       - cartr/qt4
       - rafaelgarrido/homebrew-caveats
     packages:
+      # Global Dependencies
+      - git
+      - cmake
+      - boost
+      - cppunit
+      - log4cpp
+      # Python Wrappers
+      - python@2
+      - swig
+      # docs
+      - doxygen
+      # grc
+      - pygtk
+      # gr-fft
+      - fftw
+      # gr-zeromq
+      - zeromq
+      # cppzmq (>= git 6c17af2) https://github.com/zeromq/cppzmq
+      # gr-wavelet
+      - gsl
+      # gr-qtgui
+      - qt@4
+      - qwt
+      # pyqt (>= 4.10.0) http://www.riverbankcomputing.co.uk/software/pyqt/download
+      
+      # uhd
+      - uhd
+      # gr-fcd
+      - libusb
+      # gr-video-sdl
+      - sdl
+      # gr-comedi
+      # comedilib (>= 0.8.1) http://www.comedi.org/
+      - thrift
+      
+      # Lime Suite
+      - sqlite
+      - wxWidgets
+      
+      # gr-osmosdr
+      - gr-osmosdr
+
       - airspy     
       - atk         
       - bison       
-      - cppunit    
-      - fftw       
       - gdk-pixbuf  
       - gnu-tar     
-      - gsl        
       - gtk+       
       - hackrf      
       - libbladerf 
@@ -27,18 +66,12 @@ addons:
       - librtlsdr   
       - orc         
       - pygobject  
-      - pygtk       
-      - qwt         
-      - sdl        
       - sip        
-      - swig        
-      - thrift      
-      - uhd        
-      - wxWidgets  
       - zmq         
       - zmqpp
-      - qt@4
+      
       - brew-caveats
+      - tree
     update: true
 install:
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
@@ -51,14 +84,39 @@ install:
   - |
     PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH" \
     ./venv/bin/pip install pycairo
-  - |
-    ./venv/bin/pip install                                         \
-                   CairoSVG==1.0.22        Cheetah     Mako        \
-                   lxml        numpy       wxPython
+  - ./venv/bin/pip install CairoSVG==1.0.22
+  
+  # Global Dependencies
+  - ./venv/bin/pip install Mako
+  # Python Wrappers
+  - ./venv/bin/pip install numpy
+  # grc
+  - ./venv/bin/pip install Cheetah
+  # gr-wxgui
+  - ./venv/bin/pip install lxml wxPython
 # https://github.com/barak/f2c
 # https://packages.gentoo.org/packages/dev-libs/libf2c
 # libf2c blas cblas 
 before_script:
+  - git clone --depth 1 --branch v3.7.13.5        git@github.com:gnuradio/gnuradio.git    gnuradio
+  - rm -R -f gnuradio/volk
+  - git clone --depth 1 --branch v1.3.1           git@github.com:gnuradio/volk.git        gnuradio/volk
+  - git clone --depth 1 --branch master           git://git.osmocom.org/gr-osmosdr        gnuradio/gr-osmosdr
+  # Lime Suite
+  - git clone --depth 1 --branch soapy-sdr-0.7.1  git@github.com:pothosware/SoapySDR.git  soapysdr
+  - |
+    GNURADIO_CMAKE_OPTS=""
+    GNURADIO_CMAKE_OPTS="-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/usr $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DFFTW3F_INCLUDE_DIRS=${INSTALL_DIR}/usr/include $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DZEROMQ_INCLUDE_DIRS=${INSTALL_DIR}/usr/include $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DTHRIFT_INCLUDE_DIRS=${INSTALL_DIR}/usr/include $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DCPPUNIT_INCLUDE_DIRS=${INSTALL_DIR}/usr/include/cppunit $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DPYTHON_EXECUTABLE=$(which python) $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DCMAKE_C_FLAGS=-framework\\ Python $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DCMAKE_CXX_FLAGS=-framework\\ Python $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DSPHINX_EXECUTABLE=${INSTALL_DIR}/usr/bin/rst2html-2.7.py $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DGR_PYTHON_DIR=${INSTALL_DIR}/usr/share/gnuradio/python/site-packages $GNURADIO_CMAKE_OPTS"
+    export GNURADIO_CMAKE_OPTS
   - |
     PATH="/usr/local/opt/bison/bin:$PATH"
     LDFLAGS="-L/usr/local/opt/bison/lib $LDFLAGS"
@@ -109,6 +167,8 @@ script:
   - "brew doctor --verbose || softwareupdate --list"
   - source venv/bin/activate
   - env
+  - tree /usr/local/opt
   - bash -x build.sh
+  - cd gnuradio; cmake $GNURADIO_CMAKE_OPTS
 before_cache:
   - brew cleanup
