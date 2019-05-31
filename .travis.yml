@@ -101,7 +101,7 @@ before_script:
   - git clone --depth 1 --branch v3.7.13.5        https://github.com/gnuradio/gnuradio.git    gnuradio
   - rm -R -f gnuradio/volk
   - git clone --depth 1 --branch v1.3.1           https://github.com/gnuradio/volk.git        gnuradio/volk
-  - git clone --depth 1 --branch master           https://git.osmocom.org/gr-osmosdr          gnuradio/gr-osmosdr
+  - git clone --depth 1 --branch master           https://github.com/osmocom/gr-osmosdr.git   gnuradio/gr-osmosdr
   # Lime Suite
   - git clone --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  soapysdr
   - |
