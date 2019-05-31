@@ -100,6 +100,7 @@ before_script:
 script:
   - "brew caveats $(brew list)" 
   - "brew doctor --verbose || softwareupdate --list"
+  - source venv/bin/activate
   - env
   - bash -x build.sh
 before_cache:
