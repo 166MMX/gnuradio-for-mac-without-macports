@@ -51,7 +51,7 @@ install:
   - pip2 install --upgrade pip setuptools
   - pip2 install --user virtualenv
   - |
-    "$(python -c "print site.USER_BASE,")"/bin/virtualenv -p /usr/bin/python2.7 venv
+    "$(python -m site --user-base)"/bin/virtualenv -p /usr/bin/python2.7 venv
   - |
     PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH" \
     ./venv/bin/pip install pycairo
