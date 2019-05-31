@@ -98,12 +98,12 @@ install:
 # https://packages.gentoo.org/packages/dev-libs/libf2c
 # libf2c blas cblas 
 before_script:
-  - git clone --depth 1 --branch v3.7.13.5        git@github.com:gnuradio/gnuradio.git    gnuradio
+  - git clone --depth 1 --branch v3.7.13.5        https://github.com/gnuradio/gnuradio.git    gnuradio
   - rm -R -f gnuradio/volk
-  - git clone --depth 1 --branch v1.3.1           git@github.com:gnuradio/volk.git        gnuradio/volk
-  - git clone --depth 1 --branch master           git://git.osmocom.org/gr-osmosdr        gnuradio/gr-osmosdr
+  - git clone --depth 1 --branch v1.3.1           https://github.com/gnuradio/volk.git        gnuradio/volk
+  - git clone --depth 1 --branch master           https://git.osmocom.org/gr-osmosdr          gnuradio/gr-osmosdr
   # Lime Suite
-  - git clone --depth 1 --branch soapy-sdr-0.7.1  git@github.com:pothosware/SoapySDR.git  soapysdr
+  - git clone --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  soapysdr
   - |
     GNURADIO_CMAKE_OPTS=""
     GNURADIO_CMAKE_OPTS="-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/usr $GNURADIO_CMAKE_OPTS"
