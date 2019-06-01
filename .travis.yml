@@ -176,7 +176,7 @@ script:
   # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   - mkdir -p build/gnuradio
   - cd build/gnuradio
-  - "cmake $GNURADIO_CMAKE_OPTS ../../gnuradio"
+  - "cmake $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
   - make
   - make test
   - bash -x build.sh
