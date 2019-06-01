@@ -75,7 +75,7 @@ cache:
     - /usr/local/Homebrew
     - $HOME/Library/Caches/Homebrew
     - $HOME/Library/Caches/pip
-before_install:
+#before_install:
   #- brew upgrade
 install:
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
