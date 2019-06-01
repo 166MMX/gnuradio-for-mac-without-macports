@@ -52,23 +52,23 @@ addons:
       - wxWidgets
       
       # gr-osmosdr
-      - gr-osmosdr
+      #- gr-osmosdr
 
-      - airspy     
-      - atk         
-      - bison       
-      - gdk-pixbuf  
-      - gnu-tar     
-      - gtk+       
-      - hackrf      
-      - libbladerf 
-      - librsvg    
-      - librtlsdr   
-      - orc         
-      - pygobject  
-      - sip        
-      - zmq         
-      - zmqpp
+      #- airspy     
+      #- atk         
+      #- bison       
+      #- gdk-pixbuf  
+      #- gnu-tar     
+      #- gtk+       
+      #- hackrf      
+      #- libbladerf 
+      #- librsvg    
+      #- librtlsdr   
+      #- orc         
+      #- pygobject  
+      #- sip        
+      #- zmq         
+      #- zmqpp
       
       - brew-caveats
       - tree
@@ -114,8 +114,8 @@ before_script:
     GNURADIO_CMAKE_OPTS="-DTHRIFT_INCLUDE_DIRS=${INSTALL_DIR}/usr/include $GNURADIO_CMAKE_OPTS"
     GNURADIO_CMAKE_OPTS="-DCPPUNIT_INCLUDE_DIRS=${INSTALL_DIR}/usr/include/cppunit $GNURADIO_CMAKE_OPTS"
     GNURADIO_CMAKE_OPTS="-DPYTHON_EXECUTABLE=$(which python) $GNURADIO_CMAKE_OPTS"
-    GNURADIO_CMAKE_OPTS="-DCMAKE_C_FLAGS=-framework\\ Python $GNURADIO_CMAKE_OPTS"
-    GNURADIO_CMAKE_OPTS="-DCMAKE_CXX_FLAGS=-framework\\ Python $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DCMAKE_C_FLAGS=-framework\ Python $GNURADIO_CMAKE_OPTS"
+    GNURADIO_CMAKE_OPTS="-DCMAKE_CXX_FLAGS=-framework\ Python $GNURADIO_CMAKE_OPTS"
     GNURADIO_CMAKE_OPTS="-DSPHINX_EXECUTABLE=${INSTALL_DIR}/usr/bin/rst2html-2.7.py $GNURADIO_CMAKE_OPTS"
     GNURADIO_CMAKE_OPTS="-DGR_PYTHON_DIR=${INSTALL_DIR}/usr/share/gnuradio/python/site-packages $GNURADIO_CMAKE_OPTS"
     export GNURADIO_CMAKE_OPTS
