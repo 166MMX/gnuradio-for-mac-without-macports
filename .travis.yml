@@ -1,11 +1,6 @@
 language: bash
 os: osx
 osx_image: xcode10.1
-cache:
-  directories:
-    - /usr/local/Homebrew
-    - $HOME/Library/Caches/Homebrew
-    - $HOME/Library/Caches/pip
 addons:
   homebrew:
     taps:
@@ -73,6 +68,13 @@ addons:
       - brew-caveats
       - tree
     update: true
+before_cache:
+  - brew cleanup
+cache:
+  directories:
+    - /usr/local/Homebrew
+    - $HOME/Library/Caches/Homebrew
+    - $HOME/Library/Caches/pip
 before_install:
   - brew upgrade
 install:
@@ -100,12 +102,13 @@ install:
 # https://packages.gentoo.org/packages/dev-libs/libf2c
 # libf2c blas cblas 
 before_script:
-  - git clone --depth 1 --branch v3.7.13.5        https://github.com/gnuradio/gnuradio.git    gnuradio
+  - mkdir src
+  - git clone --depth 1 --branch v3.7.13.5        https://github.com/gnuradio/gnuradio.git    src/gnuradio
   - rm -R -f gnuradio/volk
-  - git clone --depth 1 --branch v1.3.1           https://github.com/gnuradio/volk.git        gnuradio/volk
-  - git clone --depth 1 --branch master           https://github.com/osmocom/gr-osmosdr.git   gnuradio/gr-osmosdr
+  - git clone --depth 1 --branch v1.3.1           https://github.com/gnuradio/volk.git        src/gnuradio/volk
+  - git clone --depth 1 --branch master           https://github.com/osmocom/gr-osmosdr.git   src/gnuradio/gr-osmosdr
   # Lime Suite
-  - git clone --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  soapysdr
+  - git clone --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  src/soapysdr
   - |
     GNURADIO_CMAKE_OPTS=""
     GNURADIO_CMAKE_OPTS="-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/usr $GNURADIO_CMAKE_OPTS"
@@ -177,5 +180,3 @@ script:
   - make
   - make test
   - bash -x build.sh
-before_cache:
-  - brew cleanup
