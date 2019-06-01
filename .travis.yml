@@ -110,6 +110,7 @@ before_script:
   # Lime Suite
   - git clone --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  src/soapysdr
   - |
+    INSTALL_DIR="/Applications/GNURadio.app/Contents/Resources/root"
     GNURADIO_CMAKE_OPTS=""
     GNURADIO_CMAKE_OPTS="-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/usr $GNURADIO_CMAKE_OPTS"
     GNURADIO_CMAKE_OPTS="-DFFTW3F_INCLUDE_DIRS=${INSTALL_DIR}/usr/include $GNURADIO_CMAKE_OPTS"
@@ -176,7 +177,9 @@ script:
   # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   - mkdir -p build/gnuradio
   - cd build/gnuradio
+  - mkdir -p "/Applications/GNURadio.app/Contents/MacOS"
+  - mkdir -p "/Applications/GNURadio.app/Contents/Resources/root"
   - "cmake $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
-  - make
-  - make test
-  - bash -x build.sh
+  #- make
+  #- make test
+  #- bash -x build.sh
