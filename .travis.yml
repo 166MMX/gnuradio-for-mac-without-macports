@@ -76,7 +76,7 @@ cache:
     - $HOME/Library/Caches/Homebrew
     - $HOME/Library/Caches/pip
 before_install:
-  - brew upgrade
+  #- brew upgrade
 install:
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
 # SoapySDR LimeSuite osmo-sdr libmirisdr
