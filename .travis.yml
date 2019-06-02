@@ -84,6 +84,8 @@ install:
   - pip2 install --user virtualenv
   - |
     "$(python -m site --user-base)/bin/virtualenv" -p /usr/bin/python2.7 venv
+  - |
+    "$(python -m site --user-base)/bin/virtualenv" -p /usr/bin/python2.7 sphinx-env
   #- |
   #  PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH" \
   #  ./venv/bin/pip install pycairo
@@ -91,7 +93,7 @@ install:
 
   # Global Dependencies
   - ./venv/bin/pip install Mako
-  - ./venv/bin/pip install Sphinx
+  - ./sphinx-env/bin/pip install Sphinx
   # Python Wrappers
   - ./venv/bin/pip install numpy
   # grc
@@ -115,7 +117,7 @@ before_script:
     opts="'-DCMAKE_C_FLAGS=-framework Python' $opts"
     opts="'-DCMAKE_CXX_FLAGS=-framework Python' $opts"
     opts="-DPYTHON_EXECUTABLE=$HOME/venv/bin/python $opts"
-    opts="-DSPHINX_EXECUTABLE=$HOME/venv/bin/rst2html-2.7.py $opts"
+    opts="-DSPHINX_EXECUTABLE=$HOME/sphinx-env/bin/rst2html-2.7.py $opts"
     opts="-DCMAKE_INSTALL_PREFIX=$res_dir/root $opts"
     opts="-DGR_PYTHON_DIR=$res_dir/venv/lib/python2.7/site-packages $opts"
 
