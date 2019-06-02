@@ -110,33 +110,35 @@ before_script:
   # Lime Suite
   - git clone --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  src/soapysdr
   - |
-    RESOURCES_DIR="/Applications/GNURadio.app/Contents/Resources"
-    GNURADIO_CMAKE_OPTS=""
-    GNURADIO_CMAKE_OPTS="-DCMAKE_INSTALL_PREFIX=$RESOURCES_DIR/root $GNURADIO_CMAKE_OPTS"
-    GNURADIO_CMAKE_OPTS="-DPYTHON_EXECUTABLE=$HOME/venv/bin/python $GNURADIO_CMAKE_OPTS"
-    GNURADIO_CMAKE_OPTS="'-DCMAKE_C_FLAGS=-framework Python' $GNURADIO_CMAKE_OPTS"
-    GNURADIO_CMAKE_OPTS="'-DCMAKE_CXX_FLAGS=-framework Python' $GNURADIO_CMAKE_OPTS"
-    GNURADIO_CMAKE_OPTS="-DSPHINX_EXECUTABLE=$HOME/venv/bin/rst2html-2.7.py $GNURADIO_CMAKE_OPTS"
-    GNURADIO_CMAKE_OPTS="-DGR_PYTHON_DIR=$RESOURCES_DIR/venv/lib/python2.7/site-packages $GNURADIO_CMAKE_OPTS"
+    res_dir="/Applications/GNURadio.app/Contents/Resources"
+    opts=""
+    opts="'-DCMAKE_C_FLAGS=-framework Python' $opts"
+    opts="'-DCMAKE_CXX_FLAGS=-framework Python' $opts"
+    opts="-DPYTHON_EXECUTABLE=$HOME/venv/bin/python $opts"
+    opts="-DSPHINX_EXECUTABLE=$HOME/venv/bin/rst2html-2.7.py $opts"
+    opts="-DCMAKE_INSTALL_PREFIX=$res_dir/root $opts"
+    opts="-DGR_PYTHON_DIR=$res_dir/venv/lib/python2.7/site-packages $opts"
+
+    GNURADIO_CMAKE_OPTS="$opts"
     export GNURADIO_CMAKE_OPTS
   - |
     # coreutils
-    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    #PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
     # expat
-    PATH="/usr/local/opt/expat/bin:$PATH"
+    #PATH="/usr/local/opt/expat/bin:$PATH"
     LDFLAGS="-L/usr/local/opt/expat/lib $LDFLAGS""
     CPPFLAGS="-I/usr/local/opt/expat/include $CPPFLAGS""
     PKG_CONFIG_PATH="/usr/local/opt/expat/lib/pkgconfig:$PKG_CONFIG_PATH""
 
     # gettext
-    PATH="/usr/local/opt/gettext/bin:$PATH"
+    #PATH="/usr/local/opt/gettext/bin:$PATH"
     LDFLAGS="-L/usr/local/opt/gettext/lib $LDFLAGS""
     CPPFLAGS="-I/usr/local/opt/gettext/include $CPPFLAGS""
 
     # icu4c
-    PATH="/usr/local/opt/icu4c/bin:$PATH"
-    PATH="/usr/local/opt/icu4c/sbin:$PATH"
+    #PATH="/usr/local/opt/icu4c/bin:$PATH"
+    #PATH="/usr/local/opt/icu4c/sbin:$PATH"
     LDFLAGS="-L/usr/local/opt/icu4c/lib $LDFLAGS""
     CPPFLAGS="-I/usr/local/opt/icu4c/include $CPPFLAGS""
     PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH""
@@ -146,19 +148,19 @@ before_script:
     PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH""
 
     # libpq
-    PATH="/usr/local/opt/libpq/bin:$PATH"
+    #PATH="/usr/local/opt/libpq/bin:$PATH"
     LDFLAGS="-L/usr/local/opt/libpq/lib $LDFLAGS""
     CPPFLAGS="-I/usr/local/opt/libpq/include $CPPFLAGS""
     PKG_CONFIG_PATH="/usr/local/opt/libpq/lib/pkgconfig:$PKG_CONFIG_PATH""
 
     # libxml2
-    PATH="/usr/local/opt/libxml2/bin:$PATH"
+    #PATH="/usr/local/opt/libxml2/bin:$PATH"
     LDFLAGS="-L/usr/local/opt/libxml2/lib $LDFLAGS""
     CPPFLAGS="-I/usr/local/opt/libxml2/include $CPPFLAGS""
     PKG_CONFIG_PATH="/usr/local/opt/libxml2/lib/pkgconfig:$PKG_CONFIG_PATH""
 
     # nss
-    PATH="/usr/local/opt/nss/bin:$PATH"
+    #PATH="/usr/local/opt/nss/bin:$PATH"
     LDFLAGS="-L/usr/local/opt/nss/lib $LDFLAGS""
     CPPFLAGS="-I/usr/local/opt/nss/include $CPPFLAGS""
     PKG_CONFIG_PATH="/usr/local/opt/nss/lib/pkgconfig:$PKG_CONFIG_PATH""
@@ -169,30 +171,29 @@ before_script:
     PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig:$PKG_CONFIG_PATH""
 
     # openssl
-    PATH="/usr/local/opt/openssl/bin:$PATH"
+    #PATH="/usr/local/opt/openssl/bin:$PATH"
     LDFLAGS="-L/usr/local/opt/openssl/lib $LDFLAGS""
     CPPFLAGS="-I/usr/local/opt/openssl/include $CPPFLAGS""
     PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:$PKG_CONFIG_PATH""
 
     # qt
-    PATH="/usr/local/opt/qt/bin:$PATH"
+    #PATH="/usr/local/opt/qt/bin:$PATH"
     LDFLAGS="-L/usr/local/opt/qt/lib $LDFLAGS""
     CPPFLAGS="-I/usr/local/opt/qt/include $CPPFLAGS""
     PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig:$PKG_CONFIG_PATH""
 
     # readline
-    LDFLAGS="-L/usr/local/opt/readline/lib $LDFLAGS""
+    #LDFLAGS="-L/usr/local/opt/readline/lib $LDFLAGS""
     CPPFLAGS="-I/usr/local/opt/readline/include $CPPFLAGS""
     PKG_CONFIG_PATH="/usr/local/opt/readline/lib/pkgconfig:$PKG_CONFIG_PATH""
 
     # sqlite
-    PATH="/usr/local/opt/sqlite/bin:$PATH"
+    #PATH="/usr/local/opt/sqlite/bin:$PATH"
     LDFLAGS="-L/usr/local/opt/sqlite/lib $LDFLAGS""
     CPPFLAGS="-I/usr/local/opt/sqlite/include $CPPFLAGS""
     PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH""
 
-    export PATH LDFLAGS CPPFLAGS PKG_CONFIG_PATH
-script:
+    export LDFLAGS CPPFLAGS PKG_CONFIG_PATH
   - "brew caveats $(brew list)"
   - "brew doctor --verbose || softwareupdate --list"
   - source venv/bin/activate
@@ -203,11 +204,12 @@ script:
   - find -L /usr/local/opt -type d -name lib -depth 2 | sed 's/^/-L/' | paste -s -d \  - | sed 's/^/LDFLAGS="/;s/$/"/'
   - find -L /usr/local/opt -type d -name include -depth 2 | sed 's/^/-I/' | paste -s -d \  - | sed 's/^/CPPFLAGS="/;s/$/"/'
   - find -L /usr/local/opt -type d -name pkgconfig -depth 3 | paste -s -d ':' - | sed 's/^/PKG_CONFIG_PATH="/;s/$/"/'
-  # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   - mkdir -p build/gnuradio
   - cd build/gnuradio
   - mkdir -p "/Applications/GNURadio.app/Contents/MacOS"
   - mkdir -p "/Applications/GNURadio.app/Contents/Resources/root"
+script:
+  # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   - "cmake $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
   #- make
   #- make test
