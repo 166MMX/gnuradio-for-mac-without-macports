@@ -117,13 +117,12 @@ before_script:
     : setup cmake
     res_dir="/Applications/GNURadio.app/Contents/Resources"
     opts=""
-    opts="'-DCMAKE_C_FLAGS=-framework Python' $opts"
-    opts="'-DCMAKE_CXX_FLAGS=-framework Python' $opts"
-    opts="-DPYTHON_EXECUTABLE=$HOME/venv/bin/python $opts"
-    opts="-DSPHINX_EXECUTABLE=$HOME/sphinx-env/bin/rst2html-2.7.py $opts"
-    opts="-DCMAKE_INSTALL_PREFIX=$res_dir/root $opts"
-    opts="-DGR_PYTHON_DIR=$res_dir/venv/lib/python2.7/site-packages $opts"
-
+    opts="$opts -D 'CMAKE_C_FLAGS=-framework Python'"
+    opts="$opts -D 'CMAKE_CXX_FLAGS=-framework Python'"
+    opts="$opts -D 'CMAKE_INSTALL_PREFIX=$res_dir/root'"
+    opts="$opts -D PYTHON_EXECUTABLE=$HOME/venv/bin/python"
+    opts="$opts -D SPHINX_EXECUTABLE=$HOME/sphinx-env/bin/rst2html-2.7.py"
+    opts="$opts -D GR_PYTHON_DIR=$res_dir/venv/lib/python2.7/site-packages"
     GNURADIO_CMAKE_OPTS="$opts"
     export GNURADIO_CMAKE_OPTS
   - |
@@ -220,6 +219,7 @@ script:
   - cd build/gnuradio
   # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   - echo "cmake $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
+  - "cmake -LAH -N $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
   - "cmake --warn-uninitialized --warn-unused-vars --check-system-vars $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
   #  --trace --debug-output
   #- make
