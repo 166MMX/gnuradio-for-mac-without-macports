@@ -200,11 +200,14 @@ before_script:
     PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH"
 
     export LDFLAGS CPPFLAGS PKG_CONFIG_PATH
-  - "brew caveats $(brew list)"
-  - "brew doctor --verbose || softwareupdate --list"
-  - source venv/bin/activate
-  - env
-  - tree /usr/local/opt
+  - brew doctor --verbose || true
+  - brew list
+  - brew caveats $(brew list)
+  - softwareupdate --list
+  - ./venv/bin/pip list
+  - ./sphinx-env/bin/pip list
+  #- source venv/bin/activate
+  - env | sort | column -t -s '='
   - find -L /usr/local/opt -type d -name lib ! -depth 2 ! -path '*/npm/*' ! -path '*/node*/*'
   - find -L /usr/local/opt -type d -name include ! -depth 2 ! -path '*/npm/*' ! -path '*/node*/*'
   - find -L /usr/local/opt -type d -name lib -depth 2 | sed 's/^/-L/' | paste -s -d \  - | sed 's/^/LDFLAGS="/;s/$/"/'
