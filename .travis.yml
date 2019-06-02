@@ -83,8 +83,10 @@ install:
   - pip2 install --upgrade pip setuptools
   - pip2 install --user virtualenv
   - |
+    : spawn venv
     "$(python -m site --user-base)/bin/virtualenv" -p /usr/bin/python2.7 venv
   - |
+    : spawn sphinx-env
     "$(python -m site --user-base)/bin/virtualenv" -p /usr/bin/python2.7 sphinx-env
   #- |
   #  PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH" \
@@ -112,6 +114,7 @@ before_script:
   # Lime Suite
   - git clone --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  src/soapysdr
   - |
+    : setup cmake
     res_dir="/Applications/GNURadio.app/Contents/Resources"
     opts=""
     opts="'-DCMAKE_C_FLAGS=-framework Python' $opts"
