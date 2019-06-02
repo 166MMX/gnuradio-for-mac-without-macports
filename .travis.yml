@@ -220,7 +220,8 @@ script:
   - cd build/gnuradio
   # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   - echo "cmake $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
-  - "cmake --debug-output --trace $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
+  - "cmake --debug-output $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
+  #  --trace
   #- make
   #- make test
   #- bash -x build.sh
