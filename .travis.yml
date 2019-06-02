@@ -31,7 +31,7 @@ addons:
       - qt@4
       - qwt
       # pyqt (>= 4.10.0) http://www.riverbankcomputing.co.uk/software/pyqt/download
-      
+
       # uhd
       - uhd
       # gr-fcd
@@ -41,30 +41,30 @@ addons:
       # gr-comedi
       # comedilib (>= 0.8.1) http://www.comedi.org/
       - thrift
-      
+
       # Lime Suite
       - sqlite
       - wxWidgets
-      
+
       # gr-osmosdr
       #- gr-osmosdr
 
-      #- airspy     
-      #- atk         
-      #- bison       
-      #- gdk-pixbuf  
-      #- gnu-tar     
-      #- gtk+       
-      #- hackrf      
-      #- libbladerf 
-      #- librsvg    
-      #- librtlsdr   
-      #- orc         
-      #- pygobject  
-      #- sip        
-      #- zmq         
+      #- airspy
+      #- atk
+      #- bison
+      #- gdk-pixbuf
+      #- gnu-tar
+      #- gtk+
+      #- hackrf
+      #- libbladerf
+      #- librsvg
+      #- librtlsdr
+      #- orc
+      #- pygobject
+      #- sip
+      #- zmq
       #- zmqpp
-      
+
       - brew-caveats
       - tree
 before_cache:
@@ -82,13 +82,12 @@ install:
 # pygobject-introspection
   - pip2 install --upgrade pip setuptools
   - pip2 install --user virtualenv
-  - |
-    "$(python -m site --user-base)/bin/virtualenv" -p /usr/bin/python2.7 venv
+  - "$(python -m site --user-base)/bin/virtualenv" -p /usr/bin/python2.7 venv
   #- |
   #  PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH" \
   #  ./venv/bin/pip install pycairo
   #- ./venv/bin/pip install CairoSVG==1.0.22
-  
+
   # Global Dependencies
   - ./venv/bin/pip install Mako
   - ./venv/bin/pip install Sphinx
@@ -100,7 +99,7 @@ install:
   - ./venv/bin/pip install lxml wxPython
 # https://github.com/barak/f2c
 # https://packages.gentoo.org/packages/dev-libs/libf2c
-# libf2c blas cblas 
+# libf2c blas cblas
 before_script:
   - mkdir src
   - git clone --depth 1 --branch v3.7.13.5        https://github.com/gnuradio/gnuradio.git    src/gnuradio
@@ -193,7 +192,7 @@ before_script:
 
     export PATH LDFLAGS CPPFLAGS PKG_CONFIG_PATH
 script:
-  - "brew caveats $(brew list)" 
+  - "brew caveats $(brew list)"
   - "brew doctor --verbose || softwareupdate --list"
   - source venv/bin/activate
   - env
@@ -202,7 +201,7 @@ script:
   - find -L /usr/local/opt -type d -name include ! -depth 2 ! -path '*/npm/*' ! -path '*/node*/*'
   - find -L /usr/local/opt -type d -name lib -depth 2 | sed 's/^/-L/' | paste -s -d \  - | sed 's/^/LDFLAGS="/;s/$/"/'
   - find -L /usr/local/opt -type d -name include -depth 2 | sed 's/^/-I/' | paste -s -d \  - | sed 's/^/CPPFLAGS="/;s/$/"/'
-  - find -L /usr/local/opt -type d -name pkgconfig -depth 3 | paste -s -d : - | sed 's/^/PKG_CONFIG_PATH="/;s/$/"/'
+  - find -L /usr/local/opt -type d -name pkgconfig -depth 3 | paste -s -d ':' - | sed 's/^/PKG_CONFIG_PATH="/;s/$/"/'
   # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   - mkdir -p build/gnuradio
   - cd build/gnuradio
