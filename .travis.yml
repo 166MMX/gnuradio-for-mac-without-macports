@@ -220,7 +220,7 @@ script:
   # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   - echo "cmake $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
   - "cmake -LAH -N $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
-  - "cmake $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
+  - "cmake --verbose $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
   # --trace --debug-output --warn-uninitialized --warn-unused-vars --check-system-vars
   #- make
   #- make test
