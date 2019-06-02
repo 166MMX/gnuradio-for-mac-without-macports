@@ -106,8 +106,8 @@ install:
 before_script:
   - mkdir src
   - git clone --depth 1 --branch v3.7.13.5        https://github.com/gnuradio/gnuradio.git    src/gnuradio
-  - rm -R -f gnuradio/volk
-  - git clone --depth 1 --branch v1.3.1           https://github.com/gnuradio/volk.git        src/gnuradio/volk
+  #- rm -R -f gnuradio/volk
+  #- git clone --depth 1 --branch v1.3.1           https://github.com/gnuradio/volk.git        src/gnuradio/volk
   - git clone --depth 1 --branch master           https://github.com/osmocom/gr-osmosdr.git   src/gnuradio/gr-osmosdr
   # Lime Suite
   - git clone --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  src/soapysdr
