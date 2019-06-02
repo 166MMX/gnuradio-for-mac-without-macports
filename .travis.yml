@@ -108,6 +108,8 @@ install:
 before_script:
   - mkdir src
   - git clone --depth 1 --branch v3.7.13.5        https://github.com/gnuradio/gnuradio.git    src/gnuradio
+  - git -C src/gnuradio pull --recurse-submodules=on
+  - git -C src/gnuradio submodule update
   #- rm -R -f gnuradio/volk
   #- git clone --depth 1 --branch v1.3.1           https://github.com/gnuradio/volk.git        src/gnuradio/volk
   - git clone --depth 1 --branch master           https://github.com/osmocom/gr-osmosdr.git   src/gnuradio/gr-osmosdr
