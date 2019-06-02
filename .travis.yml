@@ -93,8 +93,8 @@ install:
   #  ./venv/bin/pip install pycairo
   #- ./venv/bin/pip install CairoSVG==1.0.22
 
-  # Global Dependencies
-  - ./venv/bin/pip install Mako
+  # Global Dependencies (Volk)
+  - ./venv/bin/pip install Mako six
   - ./sphinx-env/bin/pip install Sphinx
   # Python Wrappers
   - ./venv/bin/pip install numpy
