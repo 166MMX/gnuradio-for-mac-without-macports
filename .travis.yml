@@ -210,12 +210,13 @@ before_script:
   - find -L /usr/local/opt -type d -name lib -depth 2 | sed 's/^/-L/' | paste -s -d \  - | sed 's/^/LDFLAGS="/;s/$/"/'
   - find -L /usr/local/opt -type d -name include -depth 2 | sed 's/^/-I/' | paste -s -d \  - | sed 's/^/CPPFLAGS="/;s/$/"/'
   - find -L /usr/local/opt -type d -name pkgconfig -depth 3 | paste -s -d ':' - | sed 's/^/PKG_CONFIG_PATH="/;s/$/"/'
-  - mkdir -p build/gnuradio
-  - cd build/gnuradio
   - mkdir -p "/Applications/GNURadio.app/Contents/MacOS"
   - mkdir -p "/Applications/GNURadio.app/Contents/Resources/root"
 script:
+  - mkdir -p build/gnuradio
+  - cd build/gnuradio
   # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
+  - echo "cmake $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
   - "cmake $GNURADIO_CMAKE_OPTS ../../src/gnuradio"
   #- make
   #- make test
