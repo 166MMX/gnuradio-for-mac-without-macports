@@ -74,28 +74,27 @@ cache:
     - $HOME/Library/Caches/pip
 #before_install:
   #- brew upgrade
-install:
+
 # gnuradio gr-osmosdr hackrf libbladerf airspy librsvg
 # SoapySDR LimeSuite osmo-sdr libmirisdr
 # pygobject-introspection
-  - pip2 install --upgrade pip setuptools
-  - pip2 install --user virtualenv
-  - "virtualenv=$(python -m site --user-base)/bin/virtualenv"
-  - "python2=$(which python2.7)"
-  - "'$virtualenv' -p '$python2' $HOME/doc-env"
-  - "'$virtualenv' -p '$python2' $HOME/build-env"
+install:
   # Global Dependencies (Volk)   Mako six     Sphinx(doc)
   # Python Wrappers     numpy
   # grc       Cheetah
   # gr-wxgui  wxPython
-  - $HOME/doc-env/bin/pip install Sphinx
-  - $HOME/build-env/bin/pip install Mako six numpy Cheetah lxml wxPython
-  # gr-ctrlport
-  #- $HOME/venv/bin/pip install thrift
-  # gr-blocks
-  #- $HOME/venv/bin/pip install PyGTK
-  # gr-qtgui
-  #- $HOME/venv/bin/pip install PyQt4
+  # gr-ctrlport thrift
+  # gr-blocks PyGTK
+  # gr-qtgui PyQt4
+  - |
+    pip2 install --upgrade pip setuptools
+    pip2 install --user virtualenv
+    "virtualenv=$(python -m site --user-base)/bin/virtualenv"
+    "python2=$(which python2.7)"
+    "$virtualenv" -p "$python2" $HOME/doc-env
+    "$virtualenv" -p "$python2" $HOME/build-env
+    $HOME/doc-env/bin/pip install Sphinx
+    $HOME/build-env/bin/pip install Mako six numpy Cheetah lxml wxPython
   #- |
   #  PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH" \
   #  ./venv/bin/pip install pycairo
