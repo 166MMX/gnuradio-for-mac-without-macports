@@ -88,11 +88,9 @@ install:
   # gr-qtgui PyQt4
   - |
     pip2 install --upgrade pip setuptools
-    pip2 install --user virtualenv
-    virtualenv="$(python -m site --user-base)/bin/virtualenv"
     python2="$(which python2.7)"
-    "$virtualenv" -p "$python2" $HOME/doc-env
-    "$virtualenv" -p "$python2" $HOME/build-env
+    virtualenv -p "$python2" $HOME/doc-env
+    virtualenv -p "$python2" $HOME/build-env
     $HOME/doc-env/bin/pip install Sphinx
     $HOME/build-env/bin/pip install Mako six numpy Cheetah lxml wxPython
   #- |
@@ -126,6 +124,9 @@ before_script:
     export GNURADIO_CMAKE_OPTS
   - |
     : setup env
+    core_count="$(sysctl -n hw.physicalcpu)"
+    MAKEFLAGS="-j $((core_count+1))"
+    
     # coreutils
     #PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
@@ -208,7 +209,7 @@ before_script:
     CPPFLAGS="-I/usr/local/opt/zeromq/include $CPPFLAGS"
     PKG_CONFIG_PATH="/usr/local/opt/zeromq/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-    export LDFLAGS CPPFLAGS PKG_CONFIG_PATH
+    export LDFLAGS CPPFLAGS PKG_CONFIG_PATH MAKEFLAGS
   #- brew doctor --verbose || true
   #- brew list
   #- brew caveats $(brew list)
