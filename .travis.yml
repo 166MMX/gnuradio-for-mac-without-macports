@@ -103,9 +103,9 @@ install:
   # gr-ctrlport
   - $HOME/venv/bin/pip install thrift
   # gr-blocks
-  - $HOME/venv/bin/pip install PyGTK
+  #- $HOME/venv/bin/pip install PyGTK
   # gr-qtgui
-  # - $HOME/venv/bin/pip install PyQt4
+  - $HOME/venv/bin/pip install PyQt4
 
 # https://github.com/barak/f2c
 # https://packages.gentoo.org/packages/dev-libs/libf2c
