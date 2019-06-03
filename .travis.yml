@@ -30,7 +30,6 @@ addons:
       # gr-qtgui
       - qt@4
       - qwt
-      # pyqt (>= 4.10.0) http://www.riverbankcomputing.co.uk/software/pyqt/download
 
       # uhd
       - uhd
@@ -38,8 +37,7 @@ addons:
       - libusb
       # gr-video-sdl
       - sdl
-      # gr-comedi
-      # comedilib (>= 0.8.1) http://www.comedi.org/
+      # gr-ctrlport
       - thrift
 
       # Lime Suite
@@ -102,6 +100,13 @@ install:
   - $HOME/venv/bin/pip install Cheetah
   # gr-wxgui
   - $HOME/venv/bin/pip install lxml wxPython
+  # gr-ctrlport
+  - $HOME/venv/bin/pip install thrift
+  # gr-blocks
+  - $HOME/venv/bin/pip install PyGTK
+  # gr-qtgui
+  - $HOME/venv/bin/pip install PyQt4
+
 # https://github.com/barak/f2c
 # https://packages.gentoo.org/packages/dev-libs/libf2c
 # libf2c blas cblas
@@ -198,6 +203,17 @@ before_script:
     CPPFLAGS="-I/usr/local/opt/sqlite/include $CPPFLAGS"
     PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH"
 
+    # sqlite
+    #PATH="/usr/local/opt/sqlite/bin:$PATH"
+    LDFLAGS="-L/usr/local/opt/sqlite/lib $LDFLAGS"
+    CPPFLAGS="-I/usr/local/opt/sqlite/include $CPPFLAGS"
+    PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+    # zeromq
+    LDFLAGS="-L/usr/local/opt/zeromq/lib $LDFLAGS"
+    CPPFLAGS="-I/usr/local/opt/zeromq/include $CPPFLAGS"
+    PKG_CONFIG_PATH="/usr/local/opt/zeromq/lib/pkgconfig:$PKG_CONFIG_PATH"
+
     export LDFLAGS CPPFLAGS PKG_CONFIG_PATH
   - brew doctor --verbose || true
   - brew list
@@ -220,8 +236,8 @@ script:
   # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   - echo "cmake $GNURADIO_CMAKE_OPTS $HOME/src/gnuradio"
   - "cmake -LAH -N $GNURADIO_CMAKE_OPTS $HOME/src/gnuradio"
-  - "cmake --verbose $GNURADIO_CMAKE_OPTS $HOME/src/gnuradio"
+  - "cmake -Wno-dev $GNURADIO_CMAKE_OPTS $HOME/src/gnuradio"
   # --trace --debug-output --warn-uninitialized --warn-unused-vars --check-system-vars
-  #- make
-  #- make test
+  - make
+  - make test
   #- bash -x build.sh
