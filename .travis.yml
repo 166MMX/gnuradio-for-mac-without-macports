@@ -108,9 +108,9 @@ before_script:
   - git clone --recurse-submodules --depth 1 --branch v3.7.13.5        https://github.com/gnuradio/gnuradio.git    $HOME/src/gnuradio
   #- rm -R -f gnuradio/volk
   #- git clone --depth 1 --branch v1.3.1           https://github.com/gnuradio/volk.git        $HOME/src/gnuradio/volk
-  - git clone --recurse-submodules --depth 1 --branch master           https://github.com/osmocom/gr-osmosdr.git   $HOME/src/gnuradio/gr-osmosdr
+  #- git clone --recurse-submodules --depth 1 --branch master           https://github.com/osmocom/gr-osmosdr.git   $HOME/src/gnuradio/gr-osmosdr
   # Lime Suite
-  - git clone --recurse-submodules --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  $HOME/src/soapysdr
+  #- git clone --recurse-submodules --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  $HOME/src/soapysdr
   - |
     : setup cmake
     res_dir="/Applications/GNURadio.app/Contents/Resources"
@@ -121,7 +121,7 @@ before_script:
     opts="$opts -D PYTHON_EXECUTABLE=$HOME/build-env/bin/python"
     opts="$opts -D SPHINX_EXECUTABLE=$HOME/doc-env/bin/rst2html-2.7.py"
     opts="$opts -D GR_PYTHON_DIR=$res_dir/venv/lib/python2.7/site-packages"
-    opts="$opts -D ZEROMQ_INCLUDE_DIRS=$(brew --prefix zeromq)/include"
+    opts="$opts -D ZEROMQ_INCLUDE_DIRS=usr/local/opt/zeromq/include"
     
     GNURADIO_CMAKE_OPTS="$opts"
     export GNURADIO_CMAKE_OPTS
@@ -231,7 +231,7 @@ script:
   # https://www.gnuradio.org/doc/doxygen/build_guide.html#build_gr_cmake
   #- echo "cmake $GNURADIO_CMAKE_OPTS $HOME/src/gnuradio"
   #- "cmake -LAH -N $GNURADIO_CMAKE_OPTS $HOME/src/gnuradio"
-  - cmake -Wno-dev $GNURADIO_CMAKE_OPTS $HOME/src/gnuradio
+  - "cmake -Wno-dev $GNURADIO_CMAKE_OPTS $HOME/src/gnuradio"
   # --trace --debug-output --warn-uninitialized --warn-unused-vars --check-system-vars
   - make
   - make test
