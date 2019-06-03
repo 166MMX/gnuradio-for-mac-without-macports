@@ -38,7 +38,7 @@ addons:
       # gr-video-sdl
       - sdl
       # gr-ctrlport
-      - thrift
+      #- thrift
 
       # Lime Suite
       - sqlite
@@ -101,7 +101,7 @@ install:
   # gr-wxgui
   - $HOME/venv/bin/pip install lxml wxPython
   # gr-ctrlport
-  - $HOME/venv/bin/pip install thrift
+  #- $HOME/venv/bin/pip install thrift
   # gr-blocks
   #- $HOME/venv/bin/pip install PyGTK
   # gr-qtgui
@@ -128,6 +128,8 @@ before_script:
     opts="$opts -D PYTHON_EXECUTABLE=$HOME/venv/bin/python"
     opts="$opts -D SPHINX_EXECUTABLE=$HOME/sphinx-env/bin/rst2html-2.7.py"
     opts="$opts -D GR_PYTHON_DIR=$res_dir/venv/lib/python2.7/site-packages"
+    opts="$opts -D ZEROMQ_INCLUDE_DIRS=$(brew --prefix zeromq)/include"
+    
     GNURADIO_CMAKE_OPTS="$opts"
     export GNURADIO_CMAKE_OPTS
   - |
