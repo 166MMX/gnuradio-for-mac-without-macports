@@ -203,8 +203,8 @@ before_script:
   - brew list
   - brew caveats $(brew list)
   - softwareupdate --list
-  - ./venv/bin/pip list
-  - ./sphinx-env/bin/pip list
+  - $HOME/venv/bin/pip list
+  - $HOME/sphinx-env/bin/pip list
   #- source venv/bin/activate
   - env | sort | column -t -s '='
   - find -L /usr/local/opt -type d -name lib ! -depth 2 ! -path '*/npm/*' ! -path '*/node*/*'
