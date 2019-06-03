@@ -84,35 +84,35 @@ install:
   - pip2 install --user virtualenv
   - |
     : spawn venv
-    "$(python -m site --user-base)/bin/virtualenv" -p /usr/bin/python2.7 venv
+    "$(python -m site --user-base)/bin/virtualenv" -p /usr/bin/python2.7 $HOME/venv
   - |
     : spawn sphinx-env
-    "$(python -m site --user-base)/bin/virtualenv" -p /usr/bin/python2.7 sphinx-env
+    "$(python -m site --user-base)/bin/virtualenv" -p /usr/bin/python2.7 $HOME/sphinx-env
   #- |
   #  PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH" \
   #  ./venv/bin/pip install pycairo
   #- ./venv/bin/pip install CairoSVG==1.0.22
 
   # Global Dependencies (Volk)
-  - ./venv/bin/pip install Mako six
-  - ./sphinx-env/bin/pip install Sphinx
+  - $HOME/venv/bin/pip install Mako six
+  - $HOME/sphinx-env/bin/pip install Sphinx
   # Python Wrappers
-  - ./venv/bin/pip install numpy
+  - $HOME/venv/bin/pip install numpy
   # grc
-  - ./venv/bin/pip install Cheetah
+  - $HOME/venv/bin/pip install Cheetah
   # gr-wxgui
-  - ./venv/bin/pip install lxml wxPython
+  - $HOME/venv/bin/pip install lxml wxPython
 # https://github.com/barak/f2c
 # https://packages.gentoo.org/packages/dev-libs/libf2c
 # libf2c blas cblas
 before_script:
-  - mkdir src
-  - git clone --recurse-submodules --depth 1 --branch v3.7.13.5        https://github.com/gnuradio/gnuradio.git    src/gnuradio
+  - mkdir $HOME/src
+  - git clone --recurse-submodules --depth 1 --branch v3.7.13.5        https://github.com/gnuradio/gnuradio.git    $HOME/src/gnuradio
   #- rm -R -f gnuradio/volk
-  #- git clone --depth 1 --branch v1.3.1           https://github.com/gnuradio/volk.git        src/gnuradio/volk
-  - git clone --recurse-submodules --depth 1 --branch master           https://github.com/osmocom/gr-osmosdr.git   src/gnuradio/gr-osmosdr
+  #- git clone --depth 1 --branch v1.3.1           https://github.com/gnuradio/volk.git        $HOME/src/gnuradio/volk
+  - git clone --recurse-submodules --depth 1 --branch master           https://github.com/osmocom/gr-osmosdr.git   $HOME/src/gnuradio/gr-osmosdr
   # Lime Suite
-  - git clone --recurse-submodules --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  src/soapysdr
+  - git clone --recurse-submodules --depth 1 --branch soapy-sdr-0.7.1  https://github.com/pothosware/SoapySDR.git  $HOME/src/soapysdr
   - |
     : setup cmake
     res_dir="/Applications/GNURadio.app/Contents/Resources"
