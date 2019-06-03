@@ -80,10 +80,10 @@ install:
 # pygobject-introspection
   - pip2 install --upgrade pip setuptools
   - pip2 install --user virtualenv
-  - virtualenv="$(python -m site --user-base)/bin/virtualenv"
-  - python2="$(which python2.7)"
-  - "$virtualenv" -p "$python2" $HOME/doc-env
-  - "$virtualenv" -p "$python2" $HOME/build-env
+  - "virtualenv=$(python -m site --user-base)/bin/virtualenv"
+  - "python2=$(which python2.7)"
+  - "'$virtualenv' -p '$python2' $HOME/doc-env"
+  - "'$virtualenv' -p '$python2' $HOME/build-env"
   # Global Dependencies (Volk)   Mako six     Sphinx(doc)
   # Python Wrappers     numpy
   # grc       Cheetah
